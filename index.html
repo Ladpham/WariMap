@@ -24,7 +24,7 @@
                 position: absolute;
                 top: 5px;
                 right: 10px;
-                height: 5px; /* Adjusted height for the logo */
+                height: 15px; /* Adjusted height for the logo */
             }
             .container {
                 position: relative;
@@ -51,7 +51,7 @@
                 var coords = client.Coordinates.split(',');
                 L.marker([parseFloat(coords[0]), parseFloat(coords[1])])
                     .addTo(map)
-                    .bindPopup(`${client.name}<br>Total TPV: ${client.total_tpv}<br>Monthly TPV: ${client.monthly_tpv}`);
+                    .bindPopup(`${client.name}<br>Total TPV: ${client.total_tpv}<br>Number of transactions: ${client.number_of_transactions}<br>Activity rate: ${client.activity_rate}`);
             }
         });
     </script>
