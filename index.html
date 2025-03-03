@@ -1,34 +1,59 @@
 <!DOCTYPE html>
-   <html>
-   <head>
-       <title>Client Map</title>
-       <meta charset="utf-8" />
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-       <style>
-           #map { height: 600px; width: 100%; }
-       </style>
-   </head>
-   <body>
-       <h1>Client Map</h1>
-       <div id="map"></div>
-       <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-       <script src="data.js"></script>
-       <script>
-           var map = L.map('map').setView([5.35, -3.95], 11); // Center on a specific location
+<html>
+<head>
+    <title>Client Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+            margin: 0;
+        }
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+        .title {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            height: 50px;
+        }
+        .container {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="logo_waribei_long@2x.png" alt="Logo" class="logo">
+        <h1 class="title">Client Map</h1>
+        <div id="map"></div>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="data.js"></script>
+    <script>
+        var map = L.map('map').setView([5.35, -3.95], 11); // Center on a specific location
 
-           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-               maxZoom: 18,
-           }).addTo(map);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+        }).addTo(map);
 
-           data.forEach(function(client) {
-               if (client.Coordinates.match(/^[-]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/)) {
-                   var coords = client.Coordinates.split(',');
-                   L.marker([parseFloat(coords[0]), parseFloat(coords[1])])
-                       .addTo(map)
-                       .bindPopup(`${client.name}<br>Total TPV: ${client.total_tpv}<br>Monthly TPV: ${client.monthly_tpv}`);
-               }
-           });
-       </script>
-   </body>
-   </html>
+        data.forEach(function(client) {
+            if (client.Coordinates.match(/^[-]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/)) {
+                var coords = client.Coordinates.split(',');
+                L.marker([parseFloat(coords[0]), parseFloat(coords[1])])
+                    .addTo(map)
+                    .bindPopup(`${client.name}<br>Total TPV: ${client.total_tpv}<br>Monthly TPV: ${client.monthly_tpv}`);
+            }
+        });
+    </script>
+</body>
+</html>
